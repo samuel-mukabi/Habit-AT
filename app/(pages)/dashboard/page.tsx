@@ -1,4 +1,7 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
+import { MOCK_USER_HABITS } from '../../lib/mockData';
 import { 
     Bolt, 
     Timer, 
@@ -12,28 +15,53 @@ import {
 import Link from "next/link";
 
 export default function DeepDivePage() {
+    const [selectedHabitId, setSelectedHabitId] = useState(MOCK_USER_HABITS[0]?.id || '');
+    const activeHabit = MOCK_USER_HABITS.find(h => h.id === selectedHabitId) || MOCK_USER_HABITS[0];
+
     return (
         <>
             <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
                 <div className="lg:col-span-8">
-                    <div className="flex items-center gap-2 mb-2">
-                        <span className="inline-block w-8 h-0.5 bg-primary"></span>
-                        <span className="label-small text-primary">Active Routine</span>
+                    <div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="inline-block w-8 h-0.5 bg-primary"></span>
+                            <span className="label-small text-primary">Active Routine</span>
+                        </div>
+                        <h1 className="text-heading-mega">{activeHabit.name}</h1>
                     </div>
-                    <h1 className="text-heading-mega">Deep Work Architecture</h1>
+
                     <p className="mt-4 text-outline font-body text-lg max-w-2xl">
                         A systematic approach to cognitive endurance through scheduled isolation and rhythmic output cycles.
                     </p>
                 </div>
                 <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-6">
-                    <div className="text-right">
-                        <span className="block label-mega">24</span>
+                    <div className="text-right hidden lg:block">
+                        <span className="block label-mega">{activeHabit.streak}</span>
                         <span className="block label-small text-outline">Day Perfect Streak</span>
                     </div>
-                    <button className="btn-primary">
-                        <Bolt className="w-6 h-6" />
+                    <div className="flex justify-between items-center w-full lg:hidden">
+                        <div>
+                            <span className="block text-2xl font-black text-on-surface">{activeHabit.streak}</span>
+                            <span className="block label-tiny text-outline">Day Streak</span>
+                        </div>
+                        <Link href={'/quick-log'} className="btn-primary">
+                            <Bolt className="w-5 h-5" />
+                            Log
+                        </Link>
+                    </div>
+                    <Link href={'/quick-log'} className="btn-primary hidden lg:flex">
+                        <Bolt className="w-5 h-5" />
                         Quick Log
-                    </button>
+                    </Link>
+                    <select
+                        value={selectedHabitId}
+                        onChange={(e) => setSelectedHabitId(e.target.value)}
+                        className="bg-surface-container border border-outline-variant/30 rounded-md px-3 py-1.5 text-sm focus:ring-2 focus:ring-primary outline-none transition-all text-on-surface font-headline font-bold w-full lg:w-auto"
+                    >
+                        {MOCK_USER_HABITS.map(habit => (
+                            <option key={habit.id} value={habit.id}>{habit.name}</option>
+                        ))}
+                    </select>
                 </div>
             </section>
 

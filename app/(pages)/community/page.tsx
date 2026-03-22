@@ -1,4 +1,5 @@
 import React from 'react';
+import { UserPlus, Heart, Megaphone } from 'lucide-react';
 
 export default function CommunityPage() {
   return (
@@ -15,7 +16,7 @@ export default function CommunityPage() {
           </p>
         </div>
         <button className="btn-primary mt-6 lg:mt-0" style={{ width: 'auto' }}>
-          <span className="material-symbols-outlined">group_add</span>
+          <UserPlus className="w-5 h-5" />
           Find Seedlings
         </button>
       </section>
@@ -32,8 +33,8 @@ export default function CommunityPage() {
           <p className="font-body text-sm text-on-surface-variant">
             Just hit 100 hours of unbroken flow state this month. The earthy system is working beautifully.
           </p>
-          <div className="mt-auto flex gap-2">
-            <span className="material-symbols-outlined text-outline text-sm">favorite</span>
+          <div className="mt-auto flex gap-2 items-center">
+            <Heart className="w-4 h-4 text-outline" />
             <span className="label-small text-outline">12</span>
           </div>
         </div>
@@ -49,8 +50,8 @@ export default function CommunityPage() {
           <p className="font-body text-sm text-on-surface-variant">
             Failed my morning rhythm due to unforeseen travel. Recalibrating for an evening deep work session.
           </p>
-          <div className="mt-auto flex gap-2">
-            <span className="material-symbols-outlined text-outline text-sm">favorite</span>
+          <div className="mt-auto flex gap-2 items-center">
+            <Heart className="w-4 h-4 text-outline" />
             <span className="label-small text-outline">5</span>
           </div>
         </div>
@@ -58,7 +59,7 @@ export default function CommunityPage() {
         <div className="card-base flex flex-col gap-4 border-2 border-primary/20 bg-primary/5">
           <div className="flex items-center gap-4 border-b border-outline-variant/20 pb-4">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary">
-              <span className="material-symbols-outlined">campaign</span>
+              <Megaphone className="w-6 h-6" />
             </div>
             <div>
               <h4 className="text-heading-base text-primary">System Notice</h4>

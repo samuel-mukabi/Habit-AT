@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { MOCK_USER_HABITS } from '../../lib/mockData';
 import { 
   Dumbbell, 
   Brain, 
@@ -112,6 +113,11 @@ const CATEGORIES = ['All', 'Mindfulness', 'Gym', 'Language', 'Productivity', 'Re
 export default function DiscoverHabitsPage() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Modal State
+  const [selectedTemplateForRoutine, setSelectedTemplateForRoutine] = useState<string | null>(null);
+  const [selectedHabitId, setSelectedHabitId] = useState<string>(MOCK_USER_HABITS[0]?.id || '');
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   const filteredHabits = PREDEFINED_HABITS.filter(habit => {
     const matchesCategory = activeCategory === 'All' || habit.category === activeCategory;
@@ -200,7 +206,10 @@ export default function DiscoverHabitsPage() {
             </div>
 
             {/* Action */}
-            <button className="w-full py-3 bg-surface-container-highest text-on-surface rounded-md font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-colors cursor-pointer mt-auto">
+            <button 
+              onClick={() => setSelectedTemplateForRoutine(habit.id)}
+              className="w-full py-3 bg-surface-container-highest text-on-surface rounded-md font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-colors cursor-pointer mt-auto"
+            >
                <Plus className="w-4 h-4" />
                Add to Routine
             </button>
@@ -220,6 +229,64 @@ export default function DiscoverHabitsPage() {
             </div>
         )}
       </section>
+
+      {/* Habit Selection Modal */}
+      {selectedTemplateForRoutine && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
+          <div className="bg-surface card-base max-w-md w-full shadow-2xl border border-outline-variant/20 relative">
+            <h3 className="text-heading-2 mb-2">Select Target Habit</h3>
+            <p className="text-sm text-outline mb-6">Choose which of your existing habits this routine will be added to.</p>
+            
+            <div className="flex flex-col gap-4 mb-8">
+              {MOCK_USER_HABITS.map(habit => (
+                <label key={habit.id} className={`flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-all ${selectedHabitId === habit.id ? 'border-primary bg-primary/5 text-primary' : 'border-outline-variant/30 hover:bg-surface-container-low text-on-surface'}`}>
+                  <div className="flex items-center gap-3">
+                    <input 
+                      type="radio" 
+                      name="targetHabit" 
+                      value={habit.id} 
+                      checked={selectedHabitId === habit.id}
+                      onChange={() => setSelectedHabitId(habit.id)}
+                      className="accent-primary w-4 h-4"
+                    />
+                    <span className="font-headline font-bold">{habit.name}</span>
+                  </div>
+                  <span className="label-tiny text-outline bg-surface-container px-2 py-1 rounded-md">{habit.streak} Day Streak</span>
+                </label>
+              ))}
+            </div>
+
+            <div className="flex justify-end gap-3">
+              <button 
+                onClick={() => setSelectedTemplateForRoutine(null)}
+                className="px-5 py-2 rounded-md font-bold text-sm text-on-surface hover:bg-surface-container-high transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => {
+                  setSelectedTemplateForRoutine(null);
+                  setShowSuccessToast(true);
+                  setTimeout(() => setShowSuccessToast(false), 3000);
+                }}
+                className="btn-primary py-2 px-6"
+              >
+                Confirm Addition
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Success Toast */}
+      {showSuccessToast && (
+        <div className="fixed bottom-6 right-6 bg-secondary text-on-secondary px-6 py-4 rounded-lg shadow-xl font-bold flex items-center gap-3 animate-in slide-in-from-bottom-5 fade-in duration-300 z-50">
+          <div className="w-6 h-6 rounded-full bg-on-secondary/20 flex items-center justify-center">
+            <Plus className="w-4 h-4" />
+          </div>
+          Routine added successfully!
+        </div>
+      )}
     </>
   );
 }

@@ -1,7 +1,6 @@
 import "./globals.css";
 import React from 'react';
 import { Lexend, Public_Sans, Plus_Jakarta_Sans } from "next/font/google";
-import { AuthProvider } from './components/AuthProvider';
 import SideBar from './components/(page components)/SideBar';
 import TopNav from './components/(page components)/TopNav';
 
@@ -36,7 +35,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`light ${lexend.variable} ${publicSans.variable} ${plusJakartaSans.variable}`}>
       <body className="bg-background text-on-surface min-h-screen flex m-0">
-        <AuthProvider>
           <SideBar />
 
           {/* Main Content Area */}
@@ -47,7 +45,6 @@ export default function RootLayout({
               {children}
             </div>
           </main>
-        </AuthProvider>
       </body>
     </html>
   );

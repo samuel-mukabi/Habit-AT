@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import { SquarePen, Star, AlertCircle } from 'lucide-react';
 
 export default function JournalPage() {
   return (
@@ -15,13 +17,13 @@ export default function JournalPage() {
       </section>
 
       <div className="flex gap-4 mb-8">
-        <button className="btn-primary" style={{ width: 'auto' }}>
-          <span className="material-symbols-outlined">edit_square</span>
+        <Link href="/new-entry" className="btn-primary">
+          <SquarePen className="w-5 h-5" />
           New Entry
-        </button>
-        <button className="px-6 py-4 rounded-md font-bold text-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors">
+        </Link>
+        <Link href="/habit-filter" className="btn-secondary">
           Filter by Habit
-        </button>
+        </Link>
       </div>
 
       <section className="space-y-6">
@@ -32,8 +34,8 @@ export default function JournalPage() {
               <p className="label-small text-outline tracking-wider">Today • 11:30 AM</p>
             </div>
             <div className="flex gap-1">
-              <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <Star className="w-4 h-4 text-secondary fill-secondary" />
+              <Star className="w-4 h-4 text-secondary fill-secondary" />
             </div>
           </div>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed">
@@ -51,7 +53,7 @@ export default function JournalPage() {
               <h4 className="text-heading-base">Missed Evening Routine</h4>
               <p className="label-small text-outline tracking-wider">Yesterday • 10:00 PM</p>
             </div>
-            <span className="material-symbols-outlined text-error text-sm">warning</span>
+            <AlertCircle className="w-4 h-4 text-error" />
           </div>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed">
             Doomscrolling on Twitter bypassed the wind-down routine. Blue light exposure definitely ruined sleep architecture. App blockers need to be reinstated at 9 PM.
@@ -69,9 +71,9 @@ export default function JournalPage() {
               <p className="label-small text-outline tracking-wider">Jan 16, 2024 • 08:00 PM</p>
             </div>
             <div className="flex gap-1">
-              <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <Star className="w-4 h-4 text-secondary fill-secondary" />
+              <Star className="w-4 h-4 text-secondary fill-secondary" />
+              <Star className="w-4 h-4 text-secondary fill-secondary" />
             </div>
           </div>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed">
