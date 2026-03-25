@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MOCK_USER_HABITS } from '../../lib/mockData';
+import { MOCK_USER_HABITS } from '@/app/(backend)/lib/mockData';
 import { 
   Dumbbell, 
   Brain, 

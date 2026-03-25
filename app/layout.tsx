@@ -1,8 +1,8 @@
 import "./globals.css";
 import React from 'react';
 import { Lexend, Public_Sans, Plus_Jakarta_Sans } from "next/font/google";
-import SideBar from './components/(page components)/SideBar';
-import TopNav from './components/(page components)/TopNav';
+import SideBar from '@/app/(frontend)/components/(page components)/SideBar';
+import TopNav from '@/app/(frontend)/components/(page components)/TopNav';
 
 const lexend = Lexend({
   subsets: ["latin"],
